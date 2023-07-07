@@ -1,49 +1,45 @@
-const redelement = window.document.getElementById("circulo1");
-const yellowelement = window.document.getElementById("circulo2");
-const greenelement = window.document.getElementById("circulo3");
-const redbutton = window.document.getElementById("buttonred");
-let ativo = false;
+const redelement = window.document.getElementById('circulo1')
+const yellowelement = window.document.getElementById('circulo2')
+const greenelement = window.document.getElementById('circulo3')
+const auto = window.document.getElementById('buttonauto')
 
-function toggle() {
-  ativo = !ativo;
-  auto();
+function ligar(corelement) {
+  corelement.style.opacity = "1";
+}
+function desligar(corelement) {
+  corelement.style.opacity = '0.2'
+}
+
+function ligaEDesliga(corelement) {
+  ligar(corelement)
+  setTimeout(() => {
+    desligar(corelement)
+  }, 2000);
 }
 
 function red() {
-  redelement.style.backgroundColor = "red";
-  setTimeout(() => {
-    redelement.style.backgroundColor = "rgb(135, 0, 0)";
-  }, 2000);
+  ligaEDesliga(redelement)
 }
 
 function yellow() {
-  yellowelement.style.backgroundColor = "yellow";
-  setTimeout(() => {
-    yellowelement.style.backgroundColor = "rgb(156, 156, 0)";
-  }, 2000);
+  ligaEDesliga(yellowelement)
 }
 
 function green() {
-  greenelement.style.backgroundColor = "green";
-  setTimeout(() => {
-    greenelement.style.backgroundColor = "rgb(0, 91, 0)";
-  }, 2000);
+  ligaEDesliga(greenelement)
 }
 
-function auto() {
-  if (ativo) {
-    greenelement.style.backgroundColor = "green";
+function toggle() {
+  ligar(redelement)
+  setTimeout(() => {
+    desligar(redelement) 
+    ligar(yellowelement)
     setTimeout(() => {
-      greenelement.style.backgroundColor = "rgb(0, 91, 0)";
-      yellowelement.style.backgroundColor = "yellow";
+      desligar(yellowelement) 
+      ligar(greenelement)
       setTimeout(() => {
-        yellowelement.style.backgroundColor = "rgb(156, 156, 0)";
-        redelement.style.backgroundColor = "red";
-        setTimeout(() => {
-          redelement.style.backgroundColor = "rgb(135, 0, 0)";
-          auto();
-        }, 2000);
+        desligar(greenelement)
       }, 2000);
-    }, 2000);
-  }
+    }, 2000); 
+  }, 2000) 
 }
